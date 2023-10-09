@@ -47,20 +47,20 @@ class Solution {
         --------------------------------------------------------------------------/
         //We can approach the solution by using ArrayList<Integer> for 3rd follow up.
         /*
-        We can use for loop to go through it by finding minimum and maximum by comparing
-        length of two arrays for 2nd follow up.
+        We can use for loop to go through it by finding the minimum and maximum by comparing
+        length of two arrays for 2nd follow-up.
         /*
         /*
-        Even if it sorted or not sorted it will not consider because, we will iterate 
+        Even if it is sorted or not sorted it will not be considered because we will iterate 
         from first to last.
-        Time Complexity  : O(n*n ).
-        Space Complexity : O(n).
+        Time Complexity: O(n*n ).
+        Space Complexity: O(n).
         */ 
         /*
         ---------------------------------------------------------
         -------Self Coded----
         */
-        List<Integer> ls=new ArrayList<Integer>();
+        /*List<Integer> ls=new ArrayList<Integer>();
         int nums1Len=nums1.length,nums2Len=nums2.length;
         int[] min=(nums1Len<=nums2Len)?nums1:nums2;
         int[] max=(nums1Len>nums2Len)?nums1:nums2;
@@ -81,10 +81,40 @@ class Solution {
         //Best Memory Management :
         int[] arr=ls.stream().mapToInt(i->i).toArray();
         /*int[] arr=new int[ls.size()];
-        //arr=ls.toArray();--> We can not directly pass primitive type to object.
+        //arr=ls.toArray();--> We can not directly pass primitive type to an object.
         for(int i=0;i<ls.size();i++){
             arr[i]=ls.get(i);
-        }*/
+        }
         return arr;
+        -----------------------------------------------------------------------------------------------------------*/
+        //Optimized in time complexity but not space complexity.
+        int[] nums1_hashtable = new int[1001];
+        for (int i = 0; i < nums1.length; i++) {
+            // We iterate over the nums1 array and identify frequencies of the items in the array
+            nums1_hashtable[nums1[i]]++;
+        }
+        
+        // Now we find the intersection items
+        // As we do not have any preliminary info about the intersection, we need 
+        //an   array or list with a flexible length
+        List<Integer> intersec = new LinkedList<>();
+        for (int i = 0; i < nums2.length; i++) {
+            if (nums1_hashtable[nums2[i]] > 0) {
+                // Both arrays have the item, so it is an intersection
+                intersec.add(nums2[i]);
+                // Each element in the result must appear as many times as it 
+                //shows in both arrays
+                nums1_hashtable[nums2[i]]--;
+            }
+        }
+        
+        // Let's convert the list to an array
+        int[] ans = new int[intersec.size()];
+        for (int i = 0; i < intersec.size(); i++) {
+            ans[i] = intersec.get(i);
+        }
+        
+        return ans;
+    }
     }
 }
