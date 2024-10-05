@@ -1,6 +1,15 @@
 //Paranthesis Validation
 public class ValidatingParanthesis
 {
+	//By using stack data structure we can reduce complexity
+	/*
+ 		Idea :
+   		* Storing the by moroving to every index.
+     		* Checks if } then we can pop from stack.
+       		* By iterating util or unless we reach end of the validationPattern.
+	 	* TC : O(n)
+   		* SC : O(n)
+ 	*/
 	public static void main(String[] args) {
 	    String s="({[](){}})";
 	    if(validatingCircle(s) && validatingSquare(s) && validatingCurly(s)){
