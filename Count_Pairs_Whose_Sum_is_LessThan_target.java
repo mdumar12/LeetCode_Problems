@@ -1,5 +1,5 @@
 class Solution {
-  //Problem Number : 2824
+  /*Problem Number : 2824*/
     public int countPairs(List<Integer> nums, int target) {
         int cnt=0,l=nums.size();
         for(int i=0;i<l;i++){
