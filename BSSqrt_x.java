@@ -1,5 +1,6 @@
 /*
 Optimized code.
+
 */
 class BSSqrt_x {
     public int mySqrt(int x) {
