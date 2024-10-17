@@ -1,73 +1,47 @@
 /*
 
-<!DOCTYPE html>
-<html lang="en">
+import {Utilities} from "./utilities.js";
+//login
+const login=(e)=>{
+    // fetch form data
+    const loginFormData={
+        email : e.target.user.value,
+        password : e.target.pass.value
+    }
+    //check if user exists in backend
+    Utilities.getUser(loginFormData)
+    .then(user=> {
+        if(user){
+            return user;
+        }else{
+            throw new Error('Please register before you login');
+        }
+    })
+    .then(user=> Utilities.authenticateUser(loginFormData,user))// authenticate the user
+    .then(user=>{
+        //set the local storage
+        localStorage.setItem('userName',user.id);
+        //navigate the user to the home page
+        window.location='../html/home.html';
+    })
+    .catch(err=>{
+        alert(err.message);
+    });
+}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta http-equiv="Content-Security-Policy" content="style-src 'self' https://fonts.googleapis.com/css" />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/responsive.css" />
-    <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
-    
-    <title>WayFar - Login</title>
-    <script type="module" src="../js/login.js"></script>
-    
-</head>
 
-<body>
-    <header class="nav-header">
-        <div class="nav-title">
-            <a href="./home.html">WayFar</a>
-        </div>
-        <input type="checkbox" id="nav-check" />
-        <div class="nav-btn">
-            <label for="nav-check">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-        </div>
+//called after the login.html completes the load event
+window.onload=()=>{
+    //get the login form
+    const loginForm = document.getElementById('loginform');
+    // bind the onSubmit event to login function
+    loginForm.onsubmit=(e)=>{
+        e.preventDefault();
+        login(e);
+    };
+}
 
-    </header>
 
-    <main>
-        <section class="login-main">
-            <header>
-                <h3 class="login-head">Login</h3>
-            </header>
-            <br />
-            <form class="login-content" id="loginform" class="login">
-                <label for="name">Username</label> &nbsp;&nbsp;&nbsp;
-                <input type="text" placeholder="Enter Username" name="username" id="user" required  /><br />
-                <label for="name">Password</label> &nbsp;&nbsp;&nbsp;&nbsp;
-                <input input type="password" placeholder="Enter Password" name="password" id="pass" required /><br />
-                <button type="submit">Submit</button>
-            </form><br /><br /><br />
-            <div class="container extralogin">
-                <span class="Fpassword">Forgot <a href="#">password?</a></span>
-                <span class="newUser"><a href="register.html" target="_blank"
-                        rel="noopener noreferrer">Register</a></span>
-            </div>
-        </section>
-
-    </main>
-    <footer>
-        <span> Copyright @ WayFar, 2021 </span>
-        <div class="footer-links">
-            <a href="./contact-us.html">Contact Us</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="./terms-condition.html">Terms &amp; Conditions</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="./about-us.html">About Us</a>
-        </div>
-    </footer>
-</body>
-
-</html>
 
 */
 public class Counting_Two_Pair
