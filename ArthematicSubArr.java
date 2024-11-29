@@ -21,7 +21,8 @@ class ArthematicSubArr {
         }  
         return al;
   }
- 
+
+    
   //It can be improved.
     // public List<Boolean> checkArithmeticSubarrays(int[] nums, int[] l, int[] r) {
     //     List<Boolean> al=new ArrayList<>();
